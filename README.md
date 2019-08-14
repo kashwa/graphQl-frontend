@@ -1,4 +1,7 @@
-# bookgql-vue
+# Book website with GraphQL APIs
+```
+A front end website with Vuejs calls api from php laravel backend that implements GraphQL.
+```
 
 ## Project setup
 ```
