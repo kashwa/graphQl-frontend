@@ -8,12 +8,18 @@
         <div v-if="isLoading">Loading...</div>
         <div v-else>
           <a href="#" @click.prevent="updateSelectedCategory('all')" class="link-margin">All</a>
-          <a href="#" @click.prevent="updateSelectedCategory('featured')" class="link-margin">Featured</a>
-          <a href="#" v-for="category of data.categories" 
-          :key="category.id" class="link-margin"
-          @click.prevent="updateSelectedCategory(category.id)">
-            {{ category.name }}
-          </a>
+          <a
+            href="#"
+            @click.prevent="updateSelectedCategory('featured')"
+            class="link-margin"
+          >Featured</a>
+          <a
+            href="#"
+            v-for="category of data.categories"
+            :key="category.id"
+            class="link-margin"
+            @click.prevent="updateSelectedCategory(category.id)"
+          >{{ category.name }}</a>
         </div>
       </template>
     </ApolloQuery>
@@ -25,7 +31,9 @@
           <div v-if="isLoading">Loading...</div>
           <div v-else>
             <div v-for="book of data.books" :key="book.id">
-              {{ book.id }}) {{ book.title }}
+              <router-link :to="`/books/${book.id}`">{{ book.id }}) {{ book.title }}</router-link>
+              <div>{{ book.author }}</div>
+              <img :src="`${book.image}`" alt="cover image">
             </div>
           </div>
         </template>
@@ -33,12 +41,14 @@
     </div>
 
     <div v-else-if="selectedCategory === 'featured'">
-      <ApolloQuery :query="query" :variables="{ featured: true }">
+      <ApolloQuery :query="query" :variables="{ featured:true }">
         <template slot-scope="{ result: { data, loading }, isLoading }">
           <div v-if="isLoading">Loading...</div>
           <div v-else>
             <div v-for="book of data.booksByFeatured" :key="book.id">
-              {{ book.id }}) {{ book.title }}
+              <router-link :to="`/books/${book.id}`">{{ book.id }}) {{ book.title }}</router-link>
+              <div>{{ book.author }}</div>
+              <img :src="`${book.image}`" alt="cover image">
             </div>
           </div>
         </template>
@@ -52,7 +62,9 @@
           <div v-if="isLoading">Loading...</div>
           <div v-else>
             <div v-for="book of data.category.books" :key="book.id">
-              {{ book.id }}) {{ book.title }}
+              <router-link :to="`/books/${book.id}`">{{ book.id }}) {{ book.title }}</router-link>
+              <div>{{ book.author }}</div>
+              <img :src="`${book.image}`" alt="cover image">
             </div>
           </div>
         </template>
@@ -62,10 +74,10 @@
 </template>
 
 <script>
-import categoryQuery from "@/graphql/queries/Category.gql"
-import categoriesQuery from "@/graphql/queries/Categories.gql"
-import booksQuery from "@/graphql/queries/Books.gql"
-import booksFeaturedQuery from "@/graphql/queries/BooksFeatured.gql"
+import categoryQuery from "@/graphql/queries/Category.gql";
+import categoriesQuery from "@/graphql/queries/Categories.gql";
+import booksQuery from "@/graphql/queries/Books.gql";
+import booksFeaturedQuery from "@/graphql/queries/BooksFeatured.gql";
 
 export default {
   name: "home",
@@ -76,29 +88,28 @@ export default {
       categoriesQuery,
       booksQuery,
       booksFeaturedQuery,
-      selectedCategory: 'all',
+      selectedCategory: "all",
       query: booksQuery,
       categories: []
     };
   },
   methods: {
-    updateSelectedCategory(category){
-      if(category === 'all'){
-        this.query = booksQuery
-      } else if(category === 'featured'){
-        this.query = booksFeaturedQuery
-      } else{
-        this.query = categoryQuery
+    updateSelectedCategory(category) {
+      if (category === "all") {
+        this.query = booksQuery;
+      } else if (category === "featured") {
+        this.query = booksFeaturedQuery;
+      } else {
+        this.query = categoryQuery;
       }
       this.selectedCategory = category;
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
-.link-margin{
+.link-margin {
   margin-right: 24px;
-
 }
 </style>
