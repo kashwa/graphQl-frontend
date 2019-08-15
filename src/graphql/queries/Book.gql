@@ -7,7 +7,7 @@ query($id: ID!) {
     description
     link
     featured
-    category{
+    category {
       id
       name
     }

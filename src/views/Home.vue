@@ -1,10 +1,9 @@
 <template>
   <div class="home">
+    <router-link :to="`/books/add`">Add a book</router-link>
     <!-- Apollo Query Categories -->
     <ApolloQuery :query="categoriesQuery">
-      <!-- The result will automatically updated -->
       <template slot-scope="{ result: { data, loading }, isLoading }">
-        <!-- Some content -->
         <div v-if="isLoading">Loading...</div>
         <div v-else>
           <a href="#" @click.prevent="updateSelectedCategory('all')" class="link-margin">All</a>
@@ -33,7 +32,7 @@
             <div v-for="book of data.books" :key="book.id">
               <router-link :to="`/books/${book.id}`">{{ book.id }}) {{ book.title }}</router-link>
               <div>{{ book.author }}</div>
-              <img :src="`${book.image}`" alt="cover image">
+              <img :src="`${book.image}`" alt="cover image" />
             </div>
           </div>
         </template>
@@ -48,7 +47,7 @@
             <div v-for="book of data.booksByFeatured" :key="book.id">
               <router-link :to="`/books/${book.id}`">{{ book.id }}) {{ book.title }}</router-link>
               <div>{{ book.author }}</div>
-              <img :src="`${book.image}`" alt="cover image">
+              <img :src="`${book.image}`" alt="cover image" />
             </div>
           </div>
         </template>
@@ -64,7 +63,7 @@
             <div v-for="book of data.category.books" :key="book.id">
               <router-link :to="`/books/${book.id}`">{{ book.id }}) {{ book.title }}</router-link>
               <div>{{ book.author }}</div>
-              <img :src="`${book.image}`" alt="cover image">
+              <img :src="`${book.image}`" alt="cover image" />
             </div>
           </div>
         </template>
