@@ -12,10 +12,32 @@
           <img :src="`${data.book.image}`" alt="Cover" />
           <div>
             <router-link :to="`/books/${data.book.id}/edit`" class="link-margin">Edit</router-link>&nbsp;
-            <a href="#" class="link-margin">Delete</a>
+            <a href="#" @click.prevent="deleteBook" class="link-margin">Delete</a>
           </div>
         </div>
       </template>
     </ApolloQuery>
   </div>
 </template>
+
+<script>
+import deleteBook from "@/graphql/mutations/DeleteBook.gql";
+
+export default {
+  methods: {
+    deleteBook() {
+      this.$apollo
+        .mutate({
+          mutation: deleteBook,
+          variables: {
+            id: this.$route.params.id
+          }
+        })
+        .then(data => {
+          console.log(data);
+          this.$router.push("/");
+        });
+    }
+  }
+};
+</script>
