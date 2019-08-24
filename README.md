@@ -2,6 +2,7 @@
 ```
 A front end website with Vuejs calls api from php laravel backend that implements GraphQL.
 ```
+<img src="/src/assets/screencapture-localhost-8081-2019-08-24-18_56_53.png">
 
 ## Project setup
 ```
