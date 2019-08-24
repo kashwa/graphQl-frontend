@@ -1,6 +1,6 @@
 # Book website with GraphQL APIs
 ```
-A front end website with Vuejs calls api from php laravel backend that implements GraphQL.
+A front-end website with Vuejs, styled with TailwindCSS calls api from PHP Laravel backend that impelements GraphQL using(Lighthouse package).
 ```
 <img src="/src/assets/screencapture-localhost-8081-2019-08-24-18_56_53.png">
 
